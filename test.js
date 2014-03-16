@@ -7,39 +7,9 @@
  */
 
 
-var SQLexecuter = require('./SQLlogic');
-var express = require('express');
+//var SQLexecuter = require('./SQLlogic');
+//var express = require('express');
+var ProjectConfig = require('./Config');
+var pressa = require('./pressa');
 
-var app = express();
-app.use(express.json());
-
-
-app.get('/', function(req, res){
-    var query_result = SQLexecuter.SelectAll();
-    res.send(JSON.stringify(query_result));
-    console.log(JSON.stringify(query_result));
-}) ;
-
-app.get('/[0-9]*$', function(req, res){
-    var id = "" ;
-    for (var i = 1; i<req.url.length; i++)
-    {
-        id += req.url[i];
-    }
-    var query_result = SQLexecuter.SelectSingleItem(id);
-    res.send(JSON.stringify(query_result));
-    console.log(JSON.stringify(query_result));
-});
-
-app.post('/', function(req, res) {
-    var resultObj = {
-        topic: req.body.topic,
-        title: req.body.title,
-        content: req.body.content,
-        date: req.body.date,
-        archive: req.body.archive
-    }
-    SQLexecuter.InsertQuery(resultObj);
-});
-
-app.listen(8333);
+pressa.app.listen(ProjectConfig.serverConfig.port);

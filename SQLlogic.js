@@ -7,6 +7,7 @@
  */
 
 /* File contains all needed function to interact with SQL*/
+
 var mysql = require('mysql');
 var SqlConectionOpts = {
     host: 'localhost',
@@ -14,7 +15,7 @@ var SqlConectionOpts = {
     password: '1111',
     database: 'pressa',
     debug: 'true'
-}
+};
 var connection;
 function HandleConnection()
 {
@@ -63,7 +64,7 @@ function SelectSingleItem(nid)
             console.log(rows);
             return rows;
         }
-    })
+    });
     connection.end();
 }
 
@@ -71,7 +72,7 @@ function InsertQuery(obj)
 {
     Connect();
     var querymessage = "INSERT INTO news (topic, title content, date, archive) VALUES('" +connection.escape(obj.topic) + "','" + connection.escape(obj.title) + "','" +
-        connection.escape(obj.content) + "','" + connection.escape(obj.date) + "','" + connection.escape(obj.archive) + ",)";
+        connection.escape(obj.content) + "','" + connection.escape(obj.date) + "','" + connection.escape(obj.archive) + "')";
     connection.query('USE pressa');
     connection.query(querymessage, function(err, rows){
         if (err)
@@ -87,6 +88,8 @@ SelectAll();
 exports.SelectAll = SelectAll;
 exports.SelectSingleItem = SelectSingleItem;
 exports.InsertQuery = InsertQuery;
+
+
 
 
 

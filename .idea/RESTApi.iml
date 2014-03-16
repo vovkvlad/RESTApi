@@ -6,8 +6,8 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Node.js v0.10.22 Core Modules" level="application" />
     <orderEntry type="library" name="Node.js v0.10.25 Core Modules" level="application" />
-    <orderEntry type="library" name="mysql1" level="project" />
-    <orderEntry type="library" name="Express1" level="project" />
+    <orderEntry type="library" name="mysql" level="project" />
+    <orderEntry type="library" name="Express" level="project" />
   </component>
 </module>
 
