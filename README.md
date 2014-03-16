@@ -1,7 +1,10 @@
 RESTApi
 =======
+
+Config.js is excluded as it contain personal data, specific for each project, howeever it`s used in source code
+files. So before using it, create this file in the same directory, with next code:
+
 ````
-Config.js must be in the same directory, and should have next code:
 var dbConfig = {
     host: 'your host',
     user: 'your user',
