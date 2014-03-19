@@ -78,14 +78,10 @@ app.post('/', function(req, res){
             res.status(504);
         }
         else{
-            var topic = req.body.topic;
-            var title = req.body.title;
-            var content = req.body.content;
-            var date = req.body.date;
-            var archive = req.body.archive;
-
-            connection.query("INSERT INTO news (topic, title content, date, archive) VALUES('" +connection.escape(topic) + "','" + connection.escape(title) + "','" +
-            connection.escape(content) + "','" + connection.escape(date) + "','" + connection.escape(archive) + "')", function(err, result){
+            var queryvalues = [topic, title, content, date, archive].map(function(key){
+                return connection.escape(req.body[key]);
+            }).join("','");
+            connection.query("INSERT INTO news (topic, title, content, date, archive) VALUES('"+ queryvalues +"')", function(err, result){
                 if(err){
                     console.log('Something wrong with INSERT. Details:' + err.code);
                     res.status(504);

@@ -71,7 +71,7 @@ function SelectSingleItem(nid)
 function InsertQuery(obj)
 {
     Connect();
-    var querymessage = "INSERT INTO news (topic, title content, date, archive) VALUES('" +connection.escape(obj.topic) + "','" + connection.escape(obj.title) + "','" +
+    var querymessage = "INSERT INTO news (topic, title, content, date, archive) VALUES('" +connection.escape(obj.topic) + "','" + connection.escape(obj.title) + "','" +
         connection.escape(obj.content) + "','" + connection.escape(obj.date) + "','" + connection.escape(obj.archive) + "')";
     connection.query('USE pressa');
     connection.query(querymessage, function(err, rows){
