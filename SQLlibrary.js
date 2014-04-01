@@ -7,7 +7,7 @@
  */
 
 /* File contains all needed function to interact with SQL*/
-/*
+
 var mysql = require('mysql');
 var SqlConectionOpts = {
     host: 'localhost',
@@ -88,24 +88,7 @@ SelectAll();
 exports.SelectAll = SelectAll;
 exports.SelectSingleItem = SelectSingleItem;
 exports.InsertQuery = InsertQuery;
-*/
 
-var mysql = require('mysql');
-var ProjectConfig = require('./Config');
-
-
-var pool = mysql.createPool(ProjectConfig.dbConfig);
-
-function MakeQuery(querystring, callback){
-    pool.getConnection(function(err, connection){
-        if (err){
-            console.log('Something gone wrong with connections. Details:' + err.code);
-        }
-        else{
-            connection.query(querystring, callback());
-        }
-    });
-}
 
 exports.MakeQuery = MakeQuery;
 

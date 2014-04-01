@@ -24,6 +24,7 @@ var pool = mysql.createPool(ProjectConfig.dbConfig);
 var app = express();
 app.use(express.json());
 
+
 app.get('/',function(req, res){
     pool.getConnection(function(err, connection){
         if(err){
