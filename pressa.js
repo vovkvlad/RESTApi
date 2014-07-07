@@ -33,7 +33,7 @@ app.get('/',function(req, res){
         }
         else
         {
-            connection.query('SELECT * FROM news_umz', function(err, rows){
+            connection.query('SELECT * FROM news', function(err, rows){
                 if(err){
                     console.log('Something wrong with query. Details:' + err.code);
                     res.status(504);
@@ -57,7 +57,7 @@ app.get('/[0-9]*$',function(req, res){
         else
         {
             var id = req.url.slice(1);
-            connection.query('SELECT * FROM news_umz WHERE nid=' + connection.escape(id), function(err, rows){
+            connection.query('SELECT * FROM news WHERE nid=' + connection.escape(id), function(err, rows){
                 if(err){
                     console.log('Something wrong with query. Details:' + err.code);
                     res.status(504);
