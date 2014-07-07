@@ -13,3 +13,4 @@ var ProjectConfig = require('./Config');
 var pressa = require('./pressa');
 
 pressa.app.listen(ProjectConfig.serverConfig.port);
+console.log("server is running on " + ProjectConfig.serverConfig.port);

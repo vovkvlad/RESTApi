@@ -40,6 +40,7 @@ app.get('/',function(req, res){
                 }
                 else{
                     res.send(JSON.stringify(rows));
+                    console.log(JSON.stringify(rows))
                 }
             });
 
@@ -64,9 +65,59 @@ app.get('/[0-9]*$',function(req, res){
                 }
                 else{
                     res.send(JSON.stringify(rows));
+                    console.log(JSON.stringify(rows))
                 }
             });
 
+            connection.release();
+        }
+    });
+});
+
+app.get('/breaking', function(req, res){
+    pool.getConnection(function(err, connection){
+        if(err){
+            console.log('Something gone wrong with connections. Details: ' + err.code);
+            res.send(504);
+        }
+        else
+        {
+            connection.query('SELECT * FROM `news` WHERE isbreaking = 1 ORDER BY date DESC LIMIT 1', function(err, rows){
+                if (err){
+                    console.log('Something wrong with query. Details:' + err.code);
+                    res.send(504);
+                }
+                else
+                {
+                    res.send(JSON.stringify(rows));
+                }
+            });
+            connection.release();
+        }
+    });
+});
+
+app.get('/[a-zA-Z]*$', function(req, res){
+    pool.getConnection(function(err, connection){
+        if (err)
+        {
+            console.log('Something gone wrong with connections. Details: ' + err.code);
+            res.send(504);
+        }
+        else
+        {
+            var category = req.url.slice(1);
+            connection.query('SELECT * FROM `news` WHERE category =' + connection.escape(category) + 'ORDER BY date DESC', function(err, rows){
+                if (err)
+                {
+                    console.log('Something wrong with query. Details:' + err.code);
+                    res.send(504);
+                }
+                else
+                {
+                    res.send(JSON.stringify(rows));
+                }
+            });
             connection.release();
         }
     });
