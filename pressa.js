@@ -5,6 +5,7 @@
 var mysql = require('mysql');
 var ProjectConfig = require('./Config');
 var express = require('express');
+var bodyParser = require('body-parser');
 /*Config.js must be in the same directory, and should have next code:
 *var dbConfig = {
     host: 'your host',
@@ -22,6 +23,7 @@ var express = require('express');
  */
 var pool = mysql.createPool(ProjectConfig.dbConfig);
 var app = express();
+app.use(bodyParser.json());
 app.use(express.json());
 
 
@@ -130,7 +132,7 @@ app.post('/', function(req, res){
             res.status(504);
         }
         else{
-            var queryvalues = [topic, title, content, date, archive].map(function(key){
+            var queryvalues = [title, content, category, isbreaking, date].map(function(key){
                 return connection.escape(req.body[key]);
             }).join("','");
             connection.query("INSERT INTO news (topic, title, content, date, archive) VALUES('"+ queryvalues +"')", function(err, result){
