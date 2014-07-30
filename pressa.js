@@ -132,7 +132,7 @@ app.post('/', function(req, res){
             res.status(504);
         }
         else{
-            var queryvalues = [title, content, category, isbreaking, date].map(function(key){
+            var queryvalues = ['title', 'content', 'category', 'isbreaking', 'date'].map(function(key){
                 return connection.escape(req.body[key]);
             }).join("','");
             connection.query("INSERT INTO news (topic, title, content, date, archive) VALUES('"+ queryvalues +"')", function(err, result){
